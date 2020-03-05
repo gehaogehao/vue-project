@@ -1,4 +1,10 @@
+const path = require('path')
 const data = require("./data.json")
+
+function resolve (dir) {
+    return path.join(__dirname, dir)
+}
+
 module.exports = {
     lintOnSave:false,
     devServer:{
@@ -24,5 +30,13 @@ module.exports = {
                 })
             });
         }*/
+    },
+    configureWebpack:{
+        resolve: {
+            alias: {
+              'components': resolve('src/components'),
+              'pages': resolve('src/pages'),
+            }
+        }
     }
 }
