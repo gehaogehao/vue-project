@@ -5,5 +5,6 @@ import sellers from 'pages/ele-sellers.vue'
 export default [
     {path:'/goods',component:goods},
     {path:'/ratings',component:ratings},
-    {path:'/sellers',component:sellers}
+    {path:'/sellers',component:sellers},
+    {path:'/',redirect:'/goods'}
 ]
