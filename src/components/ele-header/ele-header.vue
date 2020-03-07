@@ -2,56 +2,56 @@
   <div class="header">
     <div class="header-top">
       <div class="avater">
-        <img src="https://fuss10.elemecdn.com/8/40/02872ce8aefe75c16d3190e75ad61jpeg.jpeg" alt="">
+        <img :src="sellersData.avatar" alt="头像">
       </div>
       <div class="info">
         <div class="title">
           <i class="brand"></i>
-          <span class="name">嘉禾一品（温都水城）</span>
+          <span class="name">{{sellersData.name}}</span>
         </div>
         <div class="msg">
-          <span class="msg-info">蜂鸟专送/36分钟送达</span>
+          <span class="msg-info">{{sellersData.description}}/{{sellersData.deliveryTime}}分钟送达</span>
         </div>
-        <div class="support">
-          <ele-icon :size='1' :type='1'></ele-icon>
-          <span class="text">在线支付满28减5,满50减10</span>
+        <div class="support" v-if="sellersData.supports">
+          <ele-icon :size='1' :type='sellersData.supports[0].type'></ele-icon>
+          <span class="text">{{sellersData.supports[0].content}}</span>
         </div>
-        <div class="btn">
-          <span>5个</span>
+        <div class="btn" @click="maskShow = true" v-if="sellersData.supports">
+          <span>{{sellersData.supports.length}}个</span>
           <i class="icon-keyboard_arrow_right"></i>
         </div>
       </div>
     </div>
-    <div class="header-bottom">
+    <div class="header-bottom" @click="maskShow = true">
       <div class="left">
         <i class="icon"></i>
-        <span class="text">
-          是以粥为特色的中式营养快餐，自2004年10月18日创立“嘉和一品”品牌至今，不断优化管理，积极创新，立足于“贴近百姓生活，服务千家万户”
-        </span>
+        <span class="text">{{sellersData.bulletin}}</span>
       </div>
       <i class="icon-keyboard_arrow_right right"></i>
     </div>
     <div class="bg">
-      <img src="https://fuss10.elemecdn.com/8/40/02872ce8aefe75c16d3190e75ad61jpeg.jpeg" alt="">
+      <img :src="sellersData.bgImg" alt="">
     </div>
-    <div class="mask">
+    <div class="mask" v-show="maskShow">
       <div class="mask-wrap">
         <div class="mask-main">
-          <div class="title">嘉禾一品（温都水城）</div>
-          <div class="stars"></div>
+          <div class="title">{{sellersData.name}}</div>
+          <div class="star">
+            <ele-stars :size="36" :score="sellersData.score"></ele-stars>
+          </div>
           <ele-line class="line">
             <span>优惠信息</span>
           </ele-line>
-          <ele-list class="list"></ele-list>
+          <ele-list class="list" :supports="sellersData.supports"></ele-list>
           <ele-line class="line">
             <span>商家公告</span>
           </ele-line>
           <div class="text">
-            <p>是以粥为特色的中式营养快餐，自2004年10月18日创立“嘉和一品”品牌至今，不断优化管理，积极创新，立足于“贴近百姓生活，服务千家万户</p>
+            <p>{{sellersData.bulletin}}</p>
           </div>
         </div>
       </div>
-      <div class="mask-footer">
+      <div class="mask-footer" @click="maskShow = false">
         <i class="icon-close close"></i>
       </div>
     </div>
@@ -62,13 +62,23 @@
 import icon from 'components/ele-icon/ele-icon.vue'
 import line from 'components/ele-line/ele-line.vue'
 import list from 'components/ele-list/ele-list.vue'
+import stars from 'components/ele-stars/ele-stars.vue'
   export default {
       name:'ele-header',
       components:{
         'ele-icon':icon,
         'ele-line':line,
-        'ele-list':list
-      }
+        'ele-list':list,
+        'ele-stars':stars
+      },
+      props:{
+        sellersData:Object
+      },
+      data() {
+        return {
+          maskShow:false
+        }
+      },
   }
 </script>
 
@@ -125,6 +135,12 @@ import list from 'components/ele-list/ele-list.vue'
         .support
           font-size 10px
           margin-bottom 2px
+          @media (max-width:330px) {
+            width 200px
+            overflow hidden
+            white-space nowrap
+            text-overflow ellipsis
+          }
           .text
             vertical-align top  
             font-weight 200
@@ -201,12 +217,10 @@ import list from 'components/ele-list/ele-list.vue'
           color rgb(255,255,255)
           line-height 16px
           text-align center
-        .stars
-           width 100%
-           height 24px
+        .star
+           text-align center
            margin-top 16px
            margin-bottom 18px
-           background-color pink 
         .line
           width 80%
           margin 0 auto 

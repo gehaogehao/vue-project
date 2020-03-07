@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <ele-header></ele-header>
+    <ele-header :sellersData="sellersData"></ele-header>
     <div class="navs">
       <div class="item">
         <router-link to="/goods">商品</router-link>
@@ -18,17 +18,30 @@
 
 <script>
 import Header from "components/ele-header/ele-header.vue";
+const OK = 0;
 export default {
   name: "App",
+  data() {
+    return {
+      sellersData:{}
+    }
+  },
   components: {
     "ele-header": Header
-  }
+  },
+  async mounted() {
+    let result = await this.axios.get("/api/sellers")
+    if(result.errorno === OK) this.sellersData = result.data
+  },
 };
 </script>
 
 <style scoped lang='stylus'>
 @import './common/stylus/mixin.styl';
 #app
+  position relative
+  width 100%
+  height 100% 
   .navs
     one-px(rgba(7,17,27,.1))
     display flex

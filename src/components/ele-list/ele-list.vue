@@ -1,25 +1,9 @@
 <template>
   <div class="list">
       <ul>
-          <li>
-              <ele-icon :size='2' :type='1' class="icon"></ele-icon>
-              <span>在线支付满28减5,满50减10</span>
-          </li>
-          <li>
-              <ele-icon :size='2' :type='2' class="icon"></ele-icon>
-              <span>单人精彩比赛</span>
-          </li>
-          <li>
-              <ele-icon :size='2' :type='3' class="icon"></ele-icon>
-              <span>清肺雪梨汤8折抢购</span>
-          </li>
-          <li>
-              <ele-icon :size='2' :type='4' class="icon"></ele-icon>
-              <span>特价饮品八折抢购</span>
-          </li>
-          <li>
-              <ele-icon :size='2' :type='5' class="icon"></ele-icon>
-              <span>单人特色套餐</span>
+          <li v-for="(item, index) in supports" :key="index">
+              <ele-icon :size='2' :type='item.type' class="icon"></ele-icon>
+              <span>{{item.content}}</span>
           </li>
       </ul>
   </div>
@@ -29,6 +13,9 @@
 import icon from 'components/ele-icon/ele-icon.vue'
   export default {
       name:'ele-list',
+      props:{
+          supports:Array
+      },
       components:{
           'ele-icon':icon
       }
