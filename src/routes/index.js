@@ -1,4 +1,4 @@
-import goods from 'pages/ele-goods.vue'
+import goods from 'pages/ele-goods/ele-goods.vue'
 import ratings from 'pages/ele-ratings.vue'
 import sellers from 'pages/ele-sellers.vue'
 

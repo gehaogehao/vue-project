@@ -32,29 +32,31 @@
     <div class="bg">
       <img :src="sellersData.bgImg" alt="">
     </div>
-    <div class="mask" v-show="maskShow">
-      <div class="mask-wrap">
-        <div class="mask-main">
-          <div class="title">{{sellersData.name}}</div>
-          <div class="star">
-            <ele-stars :size="36" :score="sellersData.score"></ele-stars>
-          </div>
-          <ele-line class="line">
-            <span>优惠信息</span>
-          </ele-line>
-          <ele-list class="list" :supports="sellersData.supports"></ele-list>
-          <ele-line class="line">
-            <span>商家公告</span>
-          </ele-line>
-          <div class="text">
-            <p>{{sellersData.bulletin}}</p>
+    <transition name="mask">
+      <div class="mask" v-show="maskShow">
+        <div class="mask-wrap">
+          <div class="mask-main">
+            <div class="title">{{sellersData.name}}</div>
+            <div class="star">
+              <ele-stars :size="36" :score="sellersData.score"></ele-stars>
+            </div>
+            <ele-line class="line">
+              <span>优惠信息</span>
+            </ele-line>
+            <ele-list class="list" :supports="sellersData.supports"></ele-list>
+            <ele-line class="line">
+              <span>商家公告</span>
+            </ele-line>
+            <div class="text">
+              <p>{{sellersData.bulletin}}</p>
+            </div>
           </div>
         </div>
+        <div class="mask-footer" @click="maskShow = false">
+          <i class="icon-close close"></i>
+        </div>
       </div>
-      <div class="mask-footer" @click="maskShow = false">
-        <i class="icon-close close"></i>
-      </div>
-    </div>
+    </transition>
   </div>
 </template>
 
