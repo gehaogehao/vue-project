@@ -22,7 +22,7 @@
         </li>
       </ul>
     </div>
-    <ele-car :sellersData="sellersData" :foods="foods"></ele-car>
+    <ele-car :sellersData="sellersData" :foods="foods" @clear='clear'></ele-car>
   </div>
 </template>
 
@@ -75,6 +75,11 @@ const OK = "ok"
             tops.push(top)
           })
           this.tops = tops
+        },
+        clear(){
+          this.foods.forEach((food)=>{
+            food.count = 0
+          })
         }
       },
       computed: {

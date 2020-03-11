@@ -15,7 +15,7 @@
              <span v-show="food.oldPrice" class="oldPrice">￥{{food.oldPrice}}</span>
          </span>
      </div>
-     <ele-contorl :food='food'></ele-contorl>
+     <ele-contorl :food='food' class="contorl"></ele-contorl>
   </div>
 </template>
 
@@ -79,4 +79,8 @@ import contorl from "components/ele-contorl/ele-contorl.vue"
                 color rgb(147,153,159)
                 line-height 24px
                 text-decoration line-through 
+    .contorl 
+        position absolute
+        right 0
+        bottom 3px           
 </style>

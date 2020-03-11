@@ -7,7 +7,7 @@
       <transition name="contorlRemove">
           <span v-show="food.count > 0">{{food.count}}</span>
       </transition>
-      <i class="icon-add_circle" @click="addCount"></i>
+      <i class="icon-add_circle add" @click="addCount"></i>
   </div>
 </template>
 
@@ -18,8 +18,9 @@
           food:Object
       },
      methods: {
-        addCount(){
+        addCount(event){
             this.bus.$emit("addCount",this.food)
+            this.bus.$emit("ballsAnimation",event.target)
         },
         removeCount(){
             this.bus.$emit("removeCount",this.food)
@@ -30,9 +31,6 @@
 
 <style scoped lang='stylus'>
 .contorl
-    position absolute
-    right 0
-    bottom 3px
     i 
         display inline-block
         font-size 24px
@@ -41,6 +39,9 @@
         &.remove
             opacity 1
             transform translate3d(0,0,0) rotate(-720deg)
+        &.add
+            position relative    
+            z-index 1
     span 
         display inline-block
         width 24px 
